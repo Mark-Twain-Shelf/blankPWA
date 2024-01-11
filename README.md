@@ -1,0 +1,2 @@
+# blankPWA
+Minimalistic PWA example
