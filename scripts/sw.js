@@ -2,15 +2,14 @@
 
 importScripts('sw-toolbox.js');
 
-const path = window.location.pathname;
-console.log('SWPATH: ', path);
-toolbox.precache(["../index.html", "../manifest.json", "../browserconfig.xml", "../icons/pwa.svg"]);
+const pathPrefix = "/bankPWA";
+toolbox.precache([`${pathPrefix}/index.html`, `${pathPrefix}/manifest.json`, `${pathPrefix}/browserconfig.xml`, `${pathPrefix}/icons/pwa.svg`]);
 
-toolbox.router.get('../icons/*', toolbox.cacheFirst);
-toolbox.router.get('../screenshots/*', toolbox.cacheFirst);
-toolbox.router.get('../scripts/*', toolbox.cacheFirst);
-toolbox.router.get('../css/*', toolbox.cacheFirst);
+toolbox.router.get(`${pathPrefix}/icons/*`, toolbox.cacheFirst);
+toolbox.router.get(`${pathPrefix}/screenshots/*`, toolbox.cacheFirst);
+toolbox.router.get(`${pathPrefix}/scripts/*`, toolbox.cacheFirst);
+toolbox.router.get(`${pathPrefix}/css/*`, toolbox.cacheFirst);
 
-toolbox.router.get('../*', toolbox.networkFirst, {
+toolbox.router.get(`${pathPrefix}/*`, toolbox.networkFirst, {
   networkTimeoutSeconds: 5
 });
