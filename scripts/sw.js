@@ -1,6 +1,6 @@
 'use strict';
 
-importScripts('scripts/sw-toolbox.js');
+importScripts('sw-toolbox.js');
 
 toolbox.precache(["index.html", "manifest.json", "browserconfig.xml", "icons/pwa.svg"]);
 
