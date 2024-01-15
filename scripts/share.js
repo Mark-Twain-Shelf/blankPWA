@@ -1,8 +1,8 @@
 window.addEventListener("DOMContentLoaded", async () => {
     const contentBoxId = "mainEditor";
     const shareButtonId = "shareButton";
-    const titleStr = "blankPWA content";
-    const urlStr = "http://localhost:8000/index.html";
+    const titleStr = "blankPWA Content";
+    const urlStr = "https://mark-twain-shelf.github.io/blankPWA/";
 
     const contentBox = document.getElementById(contentBoxId);
     if (!contentBox) {
