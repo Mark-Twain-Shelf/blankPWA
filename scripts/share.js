@@ -36,7 +36,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
 });
 
-window.addEventListener("fetch", /*async*/(event) => {
+window.addEventListener("fetch", async (event) => {
+    alert(`fetch event: ${event.request.method}`);
     const contentBox = document.getElementById(contentBoxId);
     if (!contentBox) {
         console.error(`${contentBoxId} not found`);
@@ -49,6 +50,7 @@ window.addEventListener("fetch", /*async*/(event) => {
             const link = formData.get('url') || formData.get('link') || '';
             contentBox.innerHTML = `<b><a href="${link}">${title}</a></b><br/>${desc}<br/>`;
             //const responseUrl = await saveBookmark(link);
+            alert(`redirecting to ${link}`);
             return Response.redirect(link, 303);
         })());
     } else {
