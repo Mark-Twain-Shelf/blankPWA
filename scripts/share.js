@@ -9,6 +9,29 @@ window.addEventListener("DOMContentLoaded", async () => {
         console.error(`${contentBoxId} not found`);
         return;
     }
+    
+    self.addEventListener("fetch", async (event) => {
+        alert(`fetch event: ${event.request.method}`);
+        const contentBox = document.getElementById(contentBoxId);
+        if (!contentBox) {
+            console.error(`${contentBoxId} not found`);
+        }
+        if (contentBox && event.request.method !== 'POST') {
+            event.respondWith((async () => {
+                const formData = await event.request.formData();
+                const title = formData.get('title') || formData.get('name') || '';
+                const desc = formData.get('text') || formData.get('description') || '';
+                const link = formData.get('url') || formData.get('link') || '';
+                contentBox.innerHTML = `<b><a href="${link}">${title}</a></b><br/>${desc}<br/>`;
+                //const responseUrl = await saveBookmark(link);
+                alert(`redirecting to ${link}`);
+                return Response.redirect(link, 303);
+            })());
+        } else {
+            event.respondWith(fetch(event.request));
+        }
+    });
+
     const shareButton = document.getElementById(shareButtonId);
     if (!shareButton) {
         console.error(`${shareButtonId} not found`);
@@ -36,24 +59,3 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
 });
 
-window.addEventListener("fetch", async (event) => {
-    alert(`fetch event: ${event.request.method}`);
-    const contentBox = document.getElementById(contentBoxId);
-    if (!contentBox) {
-        console.error(`${contentBoxId} not found`);
-    }
-    if (contentBox && event.request.method !== 'POST') {
-        event.respondWith((async () => {
-            const formData = await event.request.formData();
-            const title = formData.get('title') || formData.get('name') || '';
-            const desc = formData.get('text') || formData.get('description') || '';
-            const link = formData.get('url') || formData.get('link') || '';
-            contentBox.innerHTML = `<b><a href="${link}">${title}</a></b><br/>${desc}<br/>`;
-            //const responseUrl = await saveBookmark(link);
-            alert(`redirecting to ${link}`);
-            return Response.redirect(link, 303);
-        })());
-    } else {
-        event.respondWith(fetch(event.request));
-    }
-});
