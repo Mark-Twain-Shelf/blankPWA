@@ -1,5 +1,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
 
+import { debugMsg, logLevel } from './debug.js';
+
 window.addEventListener("DOMContentLoaded", async () => {
   const dbName = "BlankDB";
   const storeName = "records";
@@ -8,57 +10,57 @@ window.addEventListener("DOMContentLoaded", async () => {
   const saveInterval = 30000;
 
   function save(db, items) {
-    console.log('save');
+    debugMsg('save');
     const transaction = db.transaction(storeName, "readwrite");
     transaction.oncomplete = () => {
-      console.log('save - transaction complete');
+      debugMsg('save - transaction complete', logLevel.debug);
     };
     transaction.onerror = () => {
-      console.error(`save - transaction failed with error: ${transaction.error}`);
+      debugMsg(`save - transaction failed with error: ${transaction.error}`, logLevel.error);
     };
     const objectStore = transaction.objectStore(storeName);
     for (let item of items) {
       const getRequest = objectStore.get(item.id);
       getRequest.onerror = (event) => {
-        console.error(`save - retriving ${item.id} failed with error: ${getRequest.error}`);
+        debugMsg(`save - retriving ${item.id} failed with error: ${getRequest.error}`, logLevel.error);
       };
       getRequest.onsuccess = (event) => {
         const savedItem = event.target.result;
         if (savedItem && savedItem.text === item.innerText) {
-          console.debug(`save - ${item.id} not changed`);
+          debugMsg(`save - ${item.id} not changed`, logLevel.debug);
           return;
         }
         const newItem = { id: item.id, time: Date.now(), text: item.innerText };
         const updateRequest = objectStore.put(newItem);
         updateRequest.onerror = (event) => {
-          console.error(`save - updating ${item.id} failed with error: ${updateRequest.error}`);
+          debugMsg(`save - updating ${item.id} failed with error: ${updateRequest.error}`, logLevel.error);
         };
         updateRequest.onsuccess = (event) => {
-          console.debug(`save - ${item.id}: ${newItem.text}`);
+          debugMsg(`save - ${item.id}: ${newItem.text}`, logLevel.debug);
         };
       };
     }
   }
   
   function load(db) {
-    console.log('load');
+    debugMsg('load');
     const objectStore = db.transaction(storeName).objectStore(storeName);
     objectStore.openCursor().onsuccess = (event) => {
       const cursor = event.target.result;
       if (!cursor) {
-        console.debug('load - no more data');
+        debugMsg('load - no more data', logLevel.debug);
         return;
       }
       const item = document.getElementById(cursor.key);
       if (item) {
         if (!item.innerText) {
           item.innerText = cursor.value.text;
-          console.debug(`load - ${item.id}: ${item.innerText}`);
+          debugMsg(`load - ${item.id}: ${item.innerText}`, logLevel.debug);
         } else {
-          console.debug(`load - ${item.id}: has already been edited`);
+          debugMsg(`load - ${item.id}: has already been edited`, logLevel.info);
         }
       } else {
-        console.error(`load - no item ${cursor.key} found`);
+        debugMsg(`load - no item ${cursor.key} found`, logLevel.error);
       }
       cursor.continue();
     };
@@ -67,37 +69,37 @@ window.addEventListener("DOMContentLoaded", async () => {
   const items = document.getElementsByClassName(itemsClass);
   let db;
 
-  console.log('Starting IndexedDB operations');
+  debugMsg('Starting IndexedDB operations');
   const request = indexedDB.open(dbName);
   request.onerror = (event) => {
-    console.error(`IndexedDB usage error: ${event.target.errorCode}`);
+    debugMsg(`IndexedDB usage error: ${event.target.errorCode}`, logLevel.error);
   };
   request.onupgradeneeded = (event) => {
-    console.debug('IndexedDB upgrade needed');
+    debugMsg('IndexedDB upgrade needed', logLevel.debug);
     const db = event.target.result;
     const objectStore = db.createObjectStore(storeName, { keyPath: primaryKey });
     objectStore.transaction.oncomplete = (event) => {
-      console.debug('IndexedDB schema upgraded');
+      debugMsg('IndexedDB schema upgraded', logLevel.debug);
       save(db, items);
     };
   };
   request.onsuccess = (event) => {
-    console.debug('IndexedDB opened successfully');
+    debugMsg('IndexedDB opened successfully', logLevel.debug);
     db = event.target.result;
     load(db);
   };
   request.onblocked = (event) => {
-    console.error('IndexedDB blocked');
+    debugMsg('IndexedDB blocked', logLevel.error);
   };
   request.onclose = (event) => {
-    console.debug('IndexedDB closed');
+    debugMsg('IndexedDB closed', logLevel.debug);
     db=null;
   };
 
   for (let item of items) {
     item.addEventListener("blur", function(event) {
       const item = event.target;
-      console.debug(`Blurred: ${item.innerText}`);
+      debugMsg(`Blurred: ${item.innerText}`, logLevel.debug);
       save(db, [item]);
     });
   }
