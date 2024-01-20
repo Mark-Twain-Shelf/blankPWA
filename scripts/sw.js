@@ -15,7 +15,7 @@ toolbox.router.get("../*", toolbox.networkFirst, {
 
 self.addEventListener("fetch", /*async*/ (event) => {
   alert(`fetch event: ${event.request.method}`);
-  const contentBoxId = "mainEditor";
+  const contentBoxId = "shareView";//"mainEditor";
   const contentBox = document.getElementById(contentBoxId);
   if (!contentBox) {
       console.error(`${contentBoxId} not found`);
