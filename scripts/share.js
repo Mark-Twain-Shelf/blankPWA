@@ -46,9 +46,9 @@ window.addEventListener("load", (event) => {
     return;
   }
   var parsedUrl = new URL(window.location);
-  const title = parsedUrl.searchParams.get("title");
-  const text = parsedUrl.searchParams.get("text");
-  const url = parsedUrl.searchParams.get("url");
+  const title = parsedUrl.searchParams.get('title');
+  const text = parsedUrl.searchParams.get('text');
+  const url = parsedUrl.searchParams.get('url');
   debugMsg(`Shared params: title=${title} text=${text} url=${url}`, logLevel.debug);
   var str;
   if (title) {
