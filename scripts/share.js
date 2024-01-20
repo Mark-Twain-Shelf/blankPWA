@@ -35,3 +35,17 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
     });
 });
+
+window.addEventListener("load", (event) => {
+    const contentBoxId = "mainEditor";
+    const contentBox = document.getElementById(contentBoxId);
+    if (!contentBox) {
+        debugMsg(`${contentBoxId} not found`, "error");
+        return;
+    }
+    var parsedUrl = new URL(window.location.toString());
+    const title = parsedUrl.searchParams.get("title");
+    const text = parsedUrl.searchParams.get("text");
+    const url = parsedUrl.searchParams.get("url");
+    contentBox.innerHTML = `<b><a href="${url}">${title}</a></b><br/>${text}<br/>`;
+});
