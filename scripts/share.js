@@ -47,5 +47,18 @@ window.addEventListener("load", (event) => {
     const title = parsedUrl.searchParams.get("title");
     const text = parsedUrl.searchParams.get("text");
     const url = parsedUrl.searchParams.get("url");
-    contentBox.innerHTML = `<b><a href="${url}">${title}</a></b><br/>${text}<br/>`;
+    console.debug(`Shared params: title=${title} text=${text} url=${url}`);
+    var str;
+    if (title) {
+        str = `<b>${title}</b><br/>`;
+    }
+    if (text) {
+        str += `${text}<br/>`;
+    }
+    if (url) {
+        str += `from: <a href="${url}">${url}</a><br/>`;
+    }
+    if (str) {
+        contentBox.innerHTML = str;
+    }
 });
