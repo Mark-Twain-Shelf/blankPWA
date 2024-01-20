@@ -14,21 +14,16 @@ toolbox.router.get("./*", toolbox.networkFirst, {
 });
 
 self.addEventListener("fetch", /*async*/ (event) => {
-  alert(`fetch event: ${event.request.method}`);
-  const contentBoxId = "shareView";//"mainEditor";
-  const contentBox = document.getElementById(contentBoxId);
-  if (!contentBox) {
-      console.error(`${contentBoxId} not found`);
-  }
-  if (contentBox && event.request.method === 'POST') {
+  console.log(`fetch event: ${event.request.method}`);
+  if (event.request.method === 'POST') {
       event.respondWith((async () => {
           const formData = await event.request.formData();
           const title = formData.get('title') || formData.get('name') || '';
           const desc = formData.get('text') || formData.get('description') || '';
           const link = formData.get('url') || formData.get('link') || '';
-          contentBox.innerHTML = `<b><a href="${link}">${title}</a></b><br/>${desc}<br/>`;
+          const str = `title=${title} text=${desc} url=${link}`;
           //const responseUrl = await saveBookmark(link);
-          alert(`redirecting to ${link}`);
+          console.log(`Got ${str} and redirecting to ${link}`);
           return Response.redirect(link, 303);
       })());
   } else {
