@@ -10,7 +10,7 @@ export const logLevel = {
 }
   
 export function debugMsg(msg, lvl = logLevel.log) {
-  if (debugView && lvl >= logLevel.info) {
+  if (debugView && lvl >= logLevel.log) {
     debugView.innerHTML += msg + "<br/>";
   }
   switch (lvl) {
