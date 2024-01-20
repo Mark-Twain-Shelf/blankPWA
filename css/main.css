@@ -32,3 +32,8 @@
 .right {
     float: right;
 }
+
+#debugView {
+    max-height: 300px;
+    overflow: auto;
+}
