@@ -45,7 +45,7 @@ window.addEventListener("load", (event) => {
     debugMsg(`${contentBoxId} not found`, "error");
     return;
   }
-  var parsedUrl = new URL(window.location.toString());
+  var parsedUrl = new URL(window.location);
   const title = parsedUrl.searchParams.get("title");
   const text = parsedUrl.searchParams.get("text");
   const url = parsedUrl.searchParams.get("url");
