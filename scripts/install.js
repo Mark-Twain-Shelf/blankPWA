@@ -1,5 +1,7 @@
 // https://glitch.com/edit/#!/mlearn-pwa-web-app-install-prompt?path=app.js%3A1%3A0
 
+import { debugMsg, logLevel } from './debug.js';
+
 const installPromptId = "installPrompt";
 const installPromptDelay = 10000;
 const installButtonId = "installButton";
@@ -7,19 +9,19 @@ const cancelButtonId = "cancelButton";
 let deferredInstall = null;
 
 function showInstallPrompt() {
-  console.log(`showInstallPrompt`);
+  debugMsg(`showInstallPrompt`);
   if (deferredInstall) {  
     const installPrompt = document.getElementById(installPromptId);
     if (installPrompt) {
       installPrompt.style.display = 'flex';
     }
   } else {
-    console.debug(`showInstallPrompt - no deferredInstall`);
+    debugMsg(`showInstallPrompt - no deferredInstall`, logLevel.warn);
   }
 }
 
 function hideInstallPrompt() {
-  console.log(`hideInstallPrompt`);
+  debugMsg(`hideInstallPrompt`);
   deferredInstall = null;
   const installPrompt = document.getElementById(installPromptId);
   if (installPrompt) {
@@ -28,26 +30,26 @@ function hideInstallPrompt() {
 }
 
 function installApp() {
-  console.log(`installApp`);
+  debugMsg(`installApp`);
   if (deferredInstall) {
     const result = deferredInstall.prompt();
     result.then((choice) => {
-      console.debug(`installApp - user choice was ${choice.outcome}`);
+      debugMsg(`installApp - user choice was ${choice.outcome}`, logLevel.debug);
     });
   } else {
-    console.debug(`installApp - no deferredInstall`);
+    debugMsg(`installApp - no deferredInstall`, logLevel.warn);
   }
   hideInstallPrompt();
 }
 
 window.addEventListener('beforeinstallprompt', (event) => {
-  console.log(`On beforeinstallprompt event`);
+  debugMsg(`On beforeinstallprompt event`, logLevel.info);
   event.preventDefault();
   deferredInstall = event;
 });
 
 window.addEventListener('appinstalled', () => {
-  console.log(`On appinstalled event`);
+  debugMsg(`On appinstalled event`);
   hideInstallPrompt();
 });
 

@@ -25,10 +25,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/install.css">
-    <script src="scripts/install.js"></script>
-    <script src="scripts/store.js"></script>
-    <script src="scripts/share.js"></script>
-    <script src="scripts/sw-reg.js"></script>
+    <script src="scripts/debug.js" type="module"></script>
+    <script src="scripts/install.js" type="module"></script>
+    <script src="scripts/store.js" type="module"></script>
+    <script src="scripts/share.js" type="module"></script>
+    <script src="scripts/sw-reg.js" type="module"></script>
 
 	<title>blankPWA</title>
 	<meta name="Description" content="PWA basic example of web app installation, data storing, sharing and push notifications.">
@@ -37,6 +38,7 @@
     <div class="block">
 	    <div class="storable" id="mainEditor" contenteditable="true"></div>
 	    <div class="actions">
+            <a class="fa fa-bars" id="settingsButton" href="javascript:void(0);"></a>
             <div class="right">
                 <a class="fa fa-folder-open" id="openButton" href="javascript:void(0);"></a>
                 <a class="fa fa-bell" id="notifyButton" href="javascript:void(0);"></a>
@@ -44,6 +46,7 @@
             </div>
         </div>
     </div>
+    <div class="block" id="debugView" style="display: none;"></div>
     <div id="installPrompt" style="display: none;">
         <div>
             <p>Install this app on your device for a better experience.</p>
