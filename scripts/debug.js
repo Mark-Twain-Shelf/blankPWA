@@ -8,42 +8,37 @@ export const logLevel = {
   warn: 3,
   error: 4
 }
-  
+const logClasses = ['log', 'debug', 'info', 'warning', 'error'];
+const logOutters = [console.log, console.debug, console.info, console.warn, console.error];
+const minLogLevel = logLevel.log;
+const viewLevel = logLevel.log;
+const maxLogLevel = logLevel.error;
+
 export function debugMsg(msg, lvl = logLevel.log) {
-  if (debugView && lvl >= logLevel.log) {
-    debugView.innerHTML += msg + "<br/>";
+  if (!(minLogLevel <= lvl && lvl <= maxLogLevel)) {
+    lvl = logLevel.log;
   }
-  switch (lvl) {
-    case logLevel.error:
-      console.error(msg);
-      break;
-    case logLevel.warn:
-      console.warn(msg);
-      break;
-    case logLevel.info:
-      console.info(msg);
-      break;
-    case logLevel.debug:
-      console.debug(msg);
-      break;
-    case logLevel.log:
-    default:
-      console.log(msg);
+  if (debugView && lvl >= viewLevel) {
+    debugView.innerHTML += `<div class=${logClasses[lvl]}>${msg}</div>\n`;
   }
+  logOutters[lvl](msg);
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
+  if (!debugView) {
+    console.warn(`${debugViewId} not found`);
+  }
   const settingsButtonId = "settingsButton";
   const settingsButton = document.getElementById(settingsButtonId);
   if (settingsButton) {
     settingsButton.addEventListener('click', () => {
       if (debugView) {
-        if (debugView.style.display === 'flex') {
+        if (debugView.style.display === 'block') {
           debugMsg(`toggleDebugView - hide`);
           debugView.style.display = 'none';
         } else {
           debugMsg(`toggleDebugView - show`);
-          debugView.style.display = 'flex';
+          debugView.style.display = 'block';
         }
       }        
     });

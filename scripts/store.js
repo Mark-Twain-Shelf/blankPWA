@@ -57,7 +57,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           item.innerText = cursor.value.text;
           debugMsg(`load - ${item.id}: ${item.innerText}`, logLevel.debug);
         } else {
-          debugMsg(`load - ${item.id}: has already been edited`, logLevel.info);
+          debugMsg(`load - ${item.id}: has already been edited`, logLevel.warn);
         }
       } else {
         debugMsg(`load - no item ${cursor.key} found`, logLevel.error);
