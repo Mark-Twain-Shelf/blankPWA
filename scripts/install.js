@@ -60,7 +60,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     installButton.addEventListener('click', installApp);
     cancelButton.addEventListener('click', hideInstallPrompt);
   }
-  setTimeout(() => {
-    showInstallPrompt();
-  }, installPromptDelay);  
+  const delayedInstallPrompt = async () => {
+    if (!deferredInstall) {
+      setTimeout(delayedInstallPrompt, installPromptDelay);
+    } else {
+      showInstallPrompt();
+    }
+  };
+  setTimeout(delayedInstallPrompt, installPromptDelay);
 });
