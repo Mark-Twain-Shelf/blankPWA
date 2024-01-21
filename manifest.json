@@ -82,11 +82,10 @@
     }
   ],
   "share_target": {
-    "action": "/blankPWA/share.html",
+    "action": "index.html",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
-    "url_template": "/blankPWA/share.html?url-template=true&title={title}&text={text}&url={url}",
-    "params": {
+    "params": { // "alias" for keys
       "title": "title",
       "text": "text",
       "url": "url"
