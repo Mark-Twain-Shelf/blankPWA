@@ -37,3 +37,19 @@
     max-height: 300px;
     overflow: auto;
 }
+
+.error {
+    color: darkred;
+}
+.warning {
+    color: darkorange;
+}
+.info {
+    color: darkolivegreen;
+}
+.debug {
+    color: dimgray;
+}
+.log {
+    color: darkgray;
+}
