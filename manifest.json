@@ -85,7 +85,7 @@
     "action": "index.html",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
-    "params": { // "alias" for keys
+    "params": {
       "title": "title",
       "text": "text",
       "url": "url"

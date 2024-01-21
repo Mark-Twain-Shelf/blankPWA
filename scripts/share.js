@@ -34,6 +34,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   if (str) {
     contentBox.innerHTML = str;
   }
+
   const shareButton = document.getElementById(shareButtonId);
   if (!shareButton) {
     debugMsg(`${shareButtonId} not found`, logLevel.error);
