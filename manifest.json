@@ -85,7 +85,7 @@
     "action": "/blankPWA/share.html",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
-    "url_template": "share.html?title={title}&text={text}&url={url}",
+    "url_template": "/blankPWA/share.html?url-template=true&title={title}&text={text}&url={url}",
     "params": {
       "title": "name",
       "text": "description",

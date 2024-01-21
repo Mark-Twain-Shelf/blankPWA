@@ -5,7 +5,7 @@ function getInputFromUrl() {
   const title = parsedUrl.searchParams.get('title');
   const text = parsedUrl.searchParams.get('text');
   const url = parsedUrl.searchParams.get('url');
-  debugMsg(`Shared params: title=${title} text=${text} url=${url}`, logLevel.debug);
+  debugMsg(`Url: ${window.location.href} with shared params: title=${title} text=${text} url=${url}`, logLevel.debug);
   var str = "";
   if (title) {
     str = `<b>${title}</b><br/>`;
