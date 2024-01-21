@@ -7,7 +7,11 @@ import { debugMsg, logLevel } from './debug.js';
 window.addEventListener("load", (event) => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(function (registration) {
-      debugMsg(`ServiceWorker registration successful with scope: ${registration.scope}`, logLevel.debug);
+      const parsedUrl = new URL(window.location);
+      const title = parsedUrl.searchParams.get('title');
+      const text = parsedUrl.searchParams.get('text');
+      const url = parsedUrl.searchParams.get('url');
+      debugMsg(`ServiceWorker registration successful with scope: ${registration.scope} with params: title=${title} text=${text} url=${url}`, logLevel.debug);
     }, function(err) {
       debugMsg(`ServiceWorker registration failed: ${err}`, logLevel.error);
     });

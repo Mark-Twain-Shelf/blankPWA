@@ -53,8 +53,12 @@ window.addEventListener("DOMContentLoaded", async () => {
       }
       const item = document.getElementById(cursor.key);
       if (item) {
-        item.innerText = cursor.value.text;
-        debugMsg(`load - ${item.id}: ${item.innerText}`, logLevel.debug);
+        if (!item.innerText) {
+          item.innerText = cursor.value.text;
+          debugMsg(`load - ${item.id}: ${item.innerText}`, logLevel.debug);
+        } else {
+          debugMsg(`load - ${item.id}: has already been edited`, logLevel.warn);
+        }
       } else {
         debugMsg(`load - no item ${cursor.key} found`, logLevel.error);
       }
