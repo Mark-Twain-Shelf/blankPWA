@@ -82,7 +82,7 @@
     }
   ],
   "share_target": {
-    "action": "/blankPWA/index.html",
+    "action": "/blankPWA/share.html",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
     "params": {
