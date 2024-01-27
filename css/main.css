@@ -18,15 +18,16 @@
     overflow: hidden;
 }
 
-.actions a {
+.actions i {
     float: left;
     color: black;
     text-align: center;
     text-decoration: none;
 }
 
-.actions a:hover {
+.actions i:hover {
     color: gray;
+    cursor: pointer;
 }
 
 .right {

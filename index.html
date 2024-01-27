@@ -31,6 +31,7 @@
     <script src="scripts/store.js" type="module"></script>
     <script src="scripts/share.js" type="module"></script>
     <script src="scripts/notify.js" type="module"></script>
+    <script src="scripts/file-io.js" type="module"></script>
 
     <title>blankPWA</title>
     <meta name="Description" content="PWA basic example of web app installation, data storing, sharing and push notifications.">
@@ -39,11 +40,11 @@
     <div class="block">
         <div class="storable" id="mainEditor" contenteditable="true"></div>
         <div class="actions">
-            <a class="fa fa-bars" id="settingsButton" href="javascript:void(0);"></a>
+            <i class="fa fa-bars" id="settingsButton"></i>
             <div class="right">
-                <a class="fa fa-folder-open" id="openButton" href="javascript:void(0);"></a>
-                <a class="fa fa-bell" id="notifyButton" href="javascript:void(0);"></a>
-                <a class="fa fa-share" id="shareButton" href="javascript:void(0);" disabled></a>
+                <i class="fa fa-folder-open" id="openButton"></i>
+                <i class="fa fa-bell" id="notifyButton"></i>
+                <i class="fa fa-share" id="shareButton" disabled></i>
             </div>
         </div>
     </div>
