@@ -30,6 +30,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       const img = 'icons/favicon-96x96.png';
       const notification = new Notification('blankPWA', { body: text, icon: img }); 
     }
+    debugMsg(`Notification.permission initially set as ${Notification.permission}`, logLevel.debug);
     if (Notification.permission === 'granted') {
       setTimeout(notify, notifyDelay); 
     } else if (Notification.permission !== 'denied') {
@@ -39,7 +40,8 @@ window.addEventListener("DOMContentLoaded", async () => {
           setTimeout(notify, notifyDelay); 
         }
       });
-    } else {
+    }
+    if (Notification.permission === 'denied') {
       debugMsg(`Notification.permission denied`, logLevel.warn);
     }
   });
