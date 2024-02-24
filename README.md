@@ -8,7 +8,9 @@ A minimalistic PWA example
 * Installation prompt  
 * Data storing in IndexedDB  
 * File access  
-* Sharing  
+* Sharing
+* Drop  
+* Open with  
 * Push notifications  
 
 [[References]]  
