@@ -13,4 +13,4 @@ A minimalistic PWA example
 * Open with  
 * Push notifications  
 
-[[References]]  
+[References](References.md)  
