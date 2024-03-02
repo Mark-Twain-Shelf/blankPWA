@@ -1,3 +1,4 @@
+const debugVersion = "0.0.1";
 const debugViewId = "debugView";
 const debugView = document.getElementById(debugViewId);
 
@@ -27,6 +28,8 @@ export function debugMsg(msg, lvl = logLevel.log) {
 window.addEventListener("DOMContentLoaded", async () => {
   if (!debugView) {
     console.warn(`${debugViewId} not found`);
+  } else {
+    debugMsg(`Version: ${debugVersion}`, logLevel.info);
   }
   const settingsButtonId = "settingsButton";
   const settingsButton = document.getElementById(settingsButtonId);
