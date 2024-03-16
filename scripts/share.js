@@ -71,4 +71,15 @@ window.addEventListener("DOMContentLoaded", async () => {
       debugMsg(`navigator.share failed with error: ${err}`, logLevel.error);
     });
   });
+
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.onmessage = function(event) {
+      debugMsg(`navigator.onmessage ${event.data.action}`, logLevel.debug);
+      if (event.data.action === 'accept-shared') {
+        const file = event.data.file;
+        const str = file.text();
+        contentBox.innerHTML = str;
+      }
+    };
+  }
 });
