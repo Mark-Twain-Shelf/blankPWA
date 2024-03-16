@@ -22,12 +22,11 @@ addEventListener('activate', event => {
 });
 
 addEventListener('fetch', event => {
-  //var pagePart = event.request.url.split("/").pop();
   if (event.request.method !== 'POST' || !event.request.url.includes('share.html')) {
     return;
   }
 
-  event.respondWith(Response.redirect('https://mark-twain-shelf.github.io/blankPWA/index.html?title=accept%20shared'));
+  event.respondWith(Response.redirect('index.html'));
   event.waitUntil(async function() {
     const data = await event.request.formData();
     const client = await self.clients.get(event.resultingClientId || event.clientId);

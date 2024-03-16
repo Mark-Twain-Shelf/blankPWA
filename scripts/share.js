@@ -8,6 +8,8 @@
 // https://github.com/w3c/web-share-target/tree/main
 // https://github.com/GoogleChrome/samples/tree/gh-pages/web-share
 // https://github.com/codewithsundeep/web-share-target-test/tree/main
+// https://justmarkup.com/articles/2020-02-11-share-images-to-your-website
+// https://github.com/justmarkup/demos/tree/gh-pages/web-share-target-image-to-grayscale
 
 import { debugMsg, logLevel } from './debug.js';
 
@@ -74,9 +76,9 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   if (navigator.serviceWorker) {
     navigator.serviceWorker.onmessage = function(event) {
-      debugMsg(`navigator.onmessage ${event.data.action}`, logLevel.debug);
       if (event.data.action === 'accept-shared') {
         const sharedFile = event.data.file;
+        debugMsg(`navigator accept-shared ${sharedFile.name}`, logLevel.debug);
         var reader = new FileReader();
         reader.addEventListener('load', function (e) {
           contentBox.innerText = e.target.result;
