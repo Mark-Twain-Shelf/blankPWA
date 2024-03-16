@@ -12,3 +12,9 @@ toolbox.router.get("css/*", toolbox.cacheFirst);
 toolbox.router.get("./*", toolbox.networkFirst, {
   networkTimeoutSeconds: 5
 });
+
+self.addEventListener('fetch', function(event) {
+  url = event.request.url;
+  method = event.request.method;
+  alert(`Handling fetch event ${method} for ${url}`);
+});
