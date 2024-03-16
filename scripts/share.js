@@ -76,9 +76,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     navigator.serviceWorker.onmessage = function(event) {
       debugMsg(`navigator.onmessage ${event.data.action}`, logLevel.debug);
       if (event.data.action === 'accept-shared') {
-        const file = event.data.file;
-        const str = file.text();
-        contentBox.innerHTML = str;
+        const sharedFile = event.data.file;
+        var reader = new FileReader();
+        reader.addEventListener('load', function (e) {
+          contentBox.innerText = e.target.result;
+        });
+        reader.readAsBinaryString(sharedFile);
       }
     };
   }

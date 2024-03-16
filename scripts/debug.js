@@ -1,4 +1,4 @@
-const debugVersion = "0.0.1-sh4";
+const debugVersion = "0.0.1-sh5";
 const debugViewId = "debugView";
 const debugView = document.getElementById(debugViewId);
 
