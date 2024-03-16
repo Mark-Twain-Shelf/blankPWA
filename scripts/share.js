@@ -13,11 +13,10 @@
 
 import { debugMsg, logLevel } from './debug.js';
 
-function getInputFromUrl() {
-  const parsedUrl = new URL(window.location);
-  const title = parsedUrl.searchParams.get('title');
-  const text = parsedUrl.searchParams.get('text');
-  const url = parsedUrl.searchParams.get('url');
+function getContentFromParams(params) {
+  const title = params.get('title');
+  const text = params.get('text');
+  const url = params.get('url');
   debugMsg(`Url: ${window.location.href} with shared params: title=${title} text=${text} url=${url}`, logLevel.debug);
   var str = "";
   if (title) {
@@ -43,7 +42,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     debugMsg(`${contentBoxId} not found`, logLevel.error);
     return;
   }
-  const str = getInputFromUrl();
+  const requestUrl = new URL(window.location);
+  const str = getContentFromParams(requestUrl.searchParams);
   if (str) {
     contentBox.innerHTML = str;
   }

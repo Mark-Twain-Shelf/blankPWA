@@ -70,7 +70,7 @@
       "form_factor": "narrow"
     }
   ],
-	"related_applications": [
+  "related_applications": [
     {
       "platform": "play",
       "id": "com.learnpwa.app",
