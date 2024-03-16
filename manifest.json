@@ -70,7 +70,7 @@
       "form_factor": "narrow"
     }
   ],
-	"related_applications": [
+  "related_applications": [
     {
       "platform": "play",
       "id": "com.learnpwa.app",
@@ -82,13 +82,19 @@
     }
   ],
   "share_target": {
-    "action": "index.html",
-    "method": "GET",
-    "enctype": "application/x-www-form-urlencoded",
+    "action": "share.html",
+    "method": "POST",
+    "enctype": "multipart/form-data",
     "params": {
       "title": "title",
       "text": "text",
-      "url": "url"
+      "url": "url",
+      "files": [
+        {
+          "name": "plainText",
+          "accept": ["text/plain", ".txt"]
+        }
+      ]
     }
   },
   "file_handlers": [
