@@ -2,7 +2,7 @@
 
 importScripts('scripts/sw-toolbox.js');
 
-toolbox.precache(["index.html", "manifest.json", "browserconfig.xml", "icons/pwa.svg"]);
+toolbox.precache(["index.html", "manifest.webmanifest", "browserconfig.xml", "icons/pwa.svg"]);
 
 toolbox.router.get("icons/*", toolbox.cacheFirst);
 toolbox.router.get("screenshots/*", toolbox.cacheFirst);
